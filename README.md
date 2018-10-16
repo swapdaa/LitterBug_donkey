@@ -1,35 +1,31 @@
 # donkeycar: a python self driving library
 
 [![Build Status](https://travis-ci.org/wroscoe/donkey.svg?branch=dev)](https://travis-ci.org/wroscoe/donkey)
-[![CodeCov](https://codecov.io/gh/wroscoe/donkey/branch/dev/graph/badge.svg)](https://codecov.io/gh/wroscoe/donkey/branch/dev)
-[![PyPI version](https://badge.fury.io/py/donkeycar.svg)](https://badge.fury.io/py/donkeycar)
 [![Py versions](https://img.shields.io/pypi/pyversions/donkeycar.svg)](https://img.shields.io/pypi/pyversions/donkeycar.svg)
 
+The LitterBug is a trash pick up rover built off the [Donkeycar](https://github.com/wroscoe/donkey) platform.  
 Donkeycar is minimalist and modular self driving library for Python. It is
 developed for hobbyists and students with a focus on allowing fast experimentation and easy
 community contributions.
 
 #### Quick Links
-* [Donkeycar Updates & Examples](http://donkeycar.com)
-* [Build instructions and Software documentation](http://docs.donkeycar.com)
-* [Slack / Chat](https://donkey-slackin.herokuapp.com/)
+* [LitterBug Write-up](https://www.hackster.io/poopityscoop/litterbug-autonomous-trash-rover-765498)
+* [LitterBug Build instructions and Software documentation](http://docs.litterbug.com)
+* [Donkeycar Documentation](http://donkeycar.com)
 
-![donkeycar](./docs/assets/build_hardware/donkey2.PNG)
+![donkeycar](./docs/assets/build_hardware/litterbug.gif)
 
-#### Use Donkey if you want to:
-* Make an RC car drive its self.
-* Compete in self driving races like [DIY Robocars](http://diyrobocars.com)
+#### Build a LitterBug to:
+* Create a version of a real life WALL-E!
 * Experiment with autopilots, mapping computer vision and neural networks.
+* Train your rover to pick up trash anywhere (..and have fun while saving the planet)
 * Log sensor data. (images, user inputs, sensor readings)
-* Drive your car via a web or game controller.
-* Leverage community contributed driving data.
-* Use existing CAD models for design upgrades.
 
-### Get driving.
-After building a Donkey2 you can turn on your car and go to http://localhost:8887 to drive.
+### Start Training!
+After building a Litterbug, press the select button on the ps3 controller and get rolling.
 
-### Modify your cars behavior.
-The donkey car is controlled by running a sequence of events
+### Create your own parts.
+Since the LitterBug is built off the Donkeycar platform, you can use their structure to create new parts. 
 
 ```python
 #Define a vehicle to take and record pictures 10 times per second.
@@ -55,5 +51,16 @@ V.add(tub, inputs=['image'])
 V.start(rate_hz=10)
 ```
 
-See [home page](http://donkeycar.com), [docs](http://docs.donkeycar.com)
-or join the [Slack channel](http://www.donkeycar.com/community.html) to learn more.
+You can also control your new part by mapping an unused button in the controller.py file 
+```python
+#AVAILABLE BUTTONS = ['tr', 'tl2', 'tr2', 'mode', 'thumbl', 'thumbr']
+#AVAILABLE AXES = ['y', 'z', 'rx']
+
+#In the update() method of the JoystickController class add:
+
+if button == '<AVAILABLE BUTTON HERE>' and button_state == 1:
+    #do something!
+
+```
+See [LitterBug write-up](https://www.hackster.io/poopityscoop/litterbug-autonomous-trash-rover-765498), [donkeycar resources](http://donkeycar.com),
+or join the [Donkeycar Slack channel](http://www.donkeycar.com/community.html) to learn more and share your build.
