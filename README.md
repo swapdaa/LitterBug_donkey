@@ -1,4 +1,4 @@
-# donkeycar: a python self driving library
+# LitterBug: Autonomous Trash Rover
 
 [![Build Status](https://travis-ci.org/wroscoe/donkey.svg?branch=dev)](https://travis-ci.org/wroscoe/donkey)
 [![Py versions](https://img.shields.io/pypi/pyversions/donkeycar.svg)](https://img.shields.io/pypi/pyversions/donkeycar.svg)
@@ -13,7 +13,7 @@ community contributions.
 * [LitterBug Build instructions and Software documentation](http://docs.litterbug.com)
 * [Donkeycar Documentation](http://donkeycar.com)
 
-![donkeycar](./docs/assets/build_hardware/litterbug.gif)
+![donkeycar](./docs/assets/build_hardware/litterbug_2.jpg)
 
 #### Build a LitterBug to:
 * Create a version of a real life WALL-E!
