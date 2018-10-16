@@ -3,15 +3,11 @@
 [![Build Status](https://travis-ci.org/wroscoe/donkey.svg?branch=dev)](https://travis-ci.org/wroscoe/donkey)
 [![Py versions](https://img.shields.io/pypi/pyversions/donkeycar.svg)](https://img.shields.io/pypi/pyversions/donkeycar.svg)
 
-The LitterBug is a trash pick up rover built off the [Donkeycar](https://github.com/wroscoe/donkey) platform.  
-Donkeycar is minimalist and modular self driving library for Python. It is
-developed for hobbyists and students with a focus on allowing fast experimentation and easy
-community contributions.
+The LitterBug is a trash pick up rover built off the [Donkeycar](https://github.com/wroscoe/donkey) platform. It's goal is to help pick up trash in beaches, parks, etc as well as provide a fun and relevant context for which to learn about self-driving vehicles, AI, and robotics.
 
-#### Quick Links
+#### Read these first!
 * [LitterBug Write-up](https://www.hackster.io/poopityscoop/litterbug-autonomous-trash-rover-765498)
 * [LitterBug Build instructions and Software documentation](http://docs.litterbug.com)
-* [Donkeycar Documentation](http://donkeycar.com)
 
 ![donkeycar](./docs/assets/build_hardware/litterbug_2.jpg)
 
@@ -25,6 +21,7 @@ community contributions.
 After building a Litterbug, press the select button on the ps3 controller and get rolling.
 
 ### Create your own parts.
+You can make the LitterBug interact with the environment in new ways by adding a new physical part. For example, this project added a scoop part using an extra servo. 
 Since the LitterBug is built off the Donkeycar platform, you can use their structure to create new parts. 
 
 ```python
@@ -51,7 +48,7 @@ V.add(tub, inputs=['image'])
 V.start(rate_hz=10)
 ```
 
-You can also control your new part by mapping an unused button in the controller.py file 
+You can also control your new part by mapping an unused button on your PS3 controller. Modifying the donkeycar/parts/controller.py file: 
 ```python
 #AVAILABLE BUTTONS = ['tr', 'tl2', 'tr2', 'mode', 'thumbl', 'thumbr']
 #AVAILABLE AXES = ['y', 'z', 'rx']
