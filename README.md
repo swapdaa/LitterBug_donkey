@@ -6,8 +6,8 @@
 The LitterBug is a trash pick up rover built off the [Donkeycar](https://github.com/wroscoe/donkey) platform. It's goal is to help pick up trash in beaches, parks, etc as well as provide a fun and relevant context for which to learn about self-driving vehicles, AI, and robotics.
 
 #### Read these first!
-* [LitterBug Write-up](https://www.hackster.io/poopityscoop/litterbug-autonomous-trash-rover-765498)
-* [LitterBug Build instructions and Software documentation](http://docs.litterbug.com)
+* [LitterBug Build instructions and Software documentation](https://github.com/mayorquinmachines/LitterBug_donkey/wiki)
+* [LitterBug Write-up](https://www.hackster.io/poopityscoop/litterbug-autonomous-trash-rover-765498) (for more details on experiment)
 
 ![donkeycar](./docs/assets/build_hardware/litterbug_2.jpg)
 
