@@ -13,7 +13,7 @@ The LitterBug is a trash pick up rover built off the [Donkeycar](https://github.
 
 #### Build a LitterBug to:
 * Create a version of a real life WALL-E!
-* Experiment with autopilots, mapping computer vision and neural networks.
+* Experiment with autopilots, mapping, computer vision, and neural networks.
 * Train your rover to pick up trash anywhere (..and have fun while saving the planet)
 * Log sensor data. (images, user inputs, sensor readings)
 
