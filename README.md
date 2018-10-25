@@ -1,6 +1,5 @@
 # LitterBug: Autonomous Trash Rover
 
-[![Build Status](https://travis-ci.org/wroscoe/donkey.svg?branch=dev)](https://travis-ci.org/wroscoe/donkey)
 [![Py versions](https://img.shields.io/pypi/pyversions/donkeycar.svg)](https://img.shields.io/pypi/pyversions/donkeycar.svg)
 
 The LitterBug is a trash pick up rover built off the [Donkeycar](https://github.com/wroscoe/donkey) platform. It's goal is to help pick up trash in beaches, parks, etc as well as provide a fun and relevant context for which to learn about self-driving vehicles, AI, and robotics.
@@ -13,7 +12,7 @@ The LitterBug is a trash pick up rover built off the [Donkeycar](https://github.
 
 #### Build a LitterBug to:
 * Create a version of a real life WALL-E!
-* Experiment with autopilots, mapping computer vision and neural networks.
+* Experiment with autopilots, mapping, computer vision, and neural networks.
 * Train your rover to pick up trash anywhere (..and have fun while saving the planet)
 * Log sensor data. (images, user inputs, sensor readings)
 
