@@ -118,19 +118,10 @@ def drive(cfg, model_path=None, use_joystick=False, use_chaos=False):
                            zero_pulse=cfg.THROTTLE_STOPPED_PWM,
                            min_pulse=cfg.THROTTLE_REVERSE_PWM)
 
-    #if use_joystick or cfg.USE_JOYSTICK_AS_DEFAULT:
-    #    V.add(dumping, inputs=['dumping'])
     V.add(dumping, inputs=['dumping'])
     V.add(steering, inputs=['angle'])
     V.add(throttle, inputs=['throttle'])
 
-    # add tub to save data
-    #if use_joystick or cfg.USE_JOYSTICK_AS_DEFAULT:
-    #    inputs = ['cam/image_array', 'user/dumping', 'user/angle', 'user/throttle', 'user/mode', 'timestamp']
-    #    types = ['image_array', 'float', 'float', 'float', 'str', 'str']
-    #else:
-    #    inputs = ['cam/image_array', 'user/angle', 'user/throttle', 'user/mode', 'timestamp']
-    #    types = ['image_array', 'float', 'float', 'str', 'str']
     inputs = ['cam/image_array', 'user/dumping', 'user/angle', 'user/throttle', 'user/mode', 'timestamp']
     types = ['image_array', 'float', 'float', 'float', 'str', 'str']
 

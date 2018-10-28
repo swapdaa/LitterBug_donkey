@@ -71,7 +71,6 @@ class KerasCategorical(KerasPilot):
 
     def run(self, img_arr):
         img_arr = img_arr.reshape((1,) + img_arr.shape)
-        #adding dumping
         dumping_binned, angle_binned, throttle = self.model.predict(img_arr)
         dumping_unbinned = util.data.linear_unbin(dumping_binned[0])
         angle_unbinned = util.data.linear_unbin(angle_binned[0])
@@ -92,7 +91,6 @@ class KerasLinear(KerasPilot):
         img_arr = img_arr.reshape((1,) + img_arr.shape)
         outputs = self.model.predict(img_arr)
         # print(len(outputs), outputs)
-        #adding dumping, shifting array
         dumping = outputs[0]
         steering = outputs[1]
         throttle = outputs[2]
