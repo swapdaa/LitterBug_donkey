@@ -51,18 +51,11 @@ def drive(cfg, model_path=None, use_joystick=False, use_chaos=False):
                                  steering_scale=cfg.JOYSTICK_STEERING_SCALE,
                                  dumping_scale=cfg.JOYSTICK_DUMPING_SCALE,
                                  auto_record_on_throttle=cfg.AUTO_RECORD_ON_THROTTLE)
-   #     V.add(ctr,
-   #             inputs=['cam/image_array'],
-   #             outputs=['user/dumping', 'user/angle', 'user/throttle', 'user/mode', 'recording'],
-   #             threaded=True)
     else:
         # This web controller will create a web server that is capable
         # of managing steering, throttle, and modes, and more.
         ctr = LocalWebController(use_chaos=use_chaos)
-    #    V.add(ctr,
-    #            inputs=['cam/image_array'],
-    #            outputs=['user/angle', 'user/throttle', 'user/mode', 'recording'],
-    #            threaded=True)
+
     V.add(ctr,
             inputs=['cam/image_array'],
             outputs=['user/dumping', 'user/angle', 'user/throttle', 'user/mode', 'recording'],
@@ -86,26 +79,26 @@ def drive(cfg, model_path=None, use_joystick=False, use_chaos=False):
         kl.load(model_path)
 
     V.add(kl, inputs=['cam/image_array'],
-              outputs=['pilot/angle', 'pilot/throttle'],
+              outputs=['pilot/dumping', 'pilot/angle', 'pilot/throttle'],
               run_condition='run_pilot')
 
     # Choose what inputs should change the car.
     def drive_mode(mode,
                    user_dumping, user_angle, user_throttle,
-                   pilot_angle, pilot_throttle):
+                   pilot_dumping, pilot_angle, pilot_throttle):
         if mode == 'user':
             return user_dumping, user_angle, user_throttle
 
         elif mode == 'local_angle':
-            return pilot_angle, user_throttle
+            return pilot_dumping, pilot_angle, user_throttle
 
         else:
-            return pilot_angle, pilot_throttle
+            return pilot_dumping, pilot_angle, pilot_throttle
 
     drive_mode_part = Lambda(drive_mode)
     V.add(drive_mode_part,
           inputs=['user/mode', 'user/dumping', 'user/angle', 'user/throttle',
-                   'pilot/angle', 'pilot/throttle'],
+                   'pilot/dumping', 'pilot/angle', 'pilot/throttle'],
           outputs=['dumping', 'angle', 'throttle'])
 
     #Dumping control
@@ -163,15 +156,17 @@ def train(cfg, tub_names, new_model_path, base_model_path=None ):
     saves the output trained model as model_name
     """
     X_keys = ['cam/image_array']
-    y_keys = ['user/angle', 'user/throttle']
+    y_keys = ['user/dumping', 'user/angle', 'user/throttle']
     def train_record_transform(record):
         """ convert categorical steering to linear and apply image augmentations """
+        record['user/dumping'] = dk.util.data.linear_bin(record['user/dumping'])
         record['user/angle'] = dk.util.data.linear_bin(record['user/angle'])
         # TODO add augmentation that doesn't use opencv
         return record
 
     def val_record_transform(record):
         """ convert categorical steering to linear """
+        record['user/dumping'] = dk.util.data.linear_bin(record['user/dumping'])
         record['user/angle'] = dk.util.data.linear_bin(record['user/angle'])
         return record
 

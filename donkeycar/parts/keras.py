@@ -71,9 +71,11 @@ class KerasCategorical(KerasPilot):
 
     def run(self, img_arr):
         img_arr = img_arr.reshape((1,) + img_arr.shape)
-        angle_binned, throttle = self.model.predict(img_arr)
+        #adding dumping
+        dumping_binned, angle_binned, throttle = self.model.predict(img_arr)
+        dumping_unbinned = util.data.linear_unbin(dumping_binned[0])
         angle_unbinned = util.data.linear_unbin(angle_binned[0])
-        return angle_unbinned, throttle[0][0]
+        return dumping_binned, angle_unbinned, throttle[0][0]
 
 
 class KerasLinear(KerasPilot):
@@ -90,9 +92,11 @@ class KerasLinear(KerasPilot):
         img_arr = img_arr.reshape((1,) + img_arr.shape)
         outputs = self.model.predict(img_arr)
         # print(len(outputs), outputs)
-        steering = outputs[0]
-        throttle = outputs[1]
-        return steering[0][0], throttle[0][0]
+        #adding dumping, shifting array
+        dumping = outputs[0]
+        steering = outputs[1]
+        throttle = outputs[2]
+        return dumping[0][0], steering[0][0], throttle[0][0]
 
 
 def default_categorical():
@@ -121,14 +125,22 @@ def default_categorical():
     angle_out = Dense(15, activation='softmax', name='angle_out')(
         x)  # Connect every input with every output and output 15 hidden units. Use Softmax to give percentage. 15 categories and find best one based off percentage 0.0-1.0
 
+
+    # categorical output of dumping
+    dumping_out = Dense(15, activation='softmax', name='dumping_out')(
+        x)  # Connect every input with every output and output 15 hidden units. Use Softmax to give percentage. 15 categories and find best one based off percentage 0.0-1.0
+
+
     # continous output of throttle
     throttle_out = Dense(1, activation='relu', name='throttle_out')(x)  # Reduce to 1 number, Positive number only
 
-    model = Model(inputs=[img_in], outputs=[angle_out, throttle_out])
+    #changing outputs
+    model = Model(inputs=[img_in], outputs=[dumping_out, angle_out, throttle_out])
     model.compile(optimizer='adam',
-                  loss={'angle_out': 'categorical_crossentropy',
+                  loss={'dumping_out': 'categorical_crossentropy',
+                        'angle_out': 'categorical_crossentropy',
                         'throttle_out': 'mean_absolute_error'},
-                  loss_weights={'angle_out': 0.9, 'throttle_out': .01})
+                  loss_weights={'dumping_out': 0.1, 'angle_out': 0.8, 'throttle_out': .1})
 
     return model
 
