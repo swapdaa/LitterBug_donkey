@@ -37,6 +37,8 @@ class LocalWebController(tornado.web.Application):
         this_dir = os.path.dirname(os.path.realpath(__file__))
         self.static_file_path = os.path.join(this_dir, 'templates', 'static')
 
+        #adding dumping
+        self.dumping = 0.0
         self.angle = 0.0
         self.throttle = 0.0
         self.mode = 'user'
@@ -78,7 +80,8 @@ class LocalWebController(tornado.web.Application):
         if self.chaos_on:
             return random_steering, self.throttle, self.mode, False
         else:
-            return self.angle, self.throttle, self.mode, self.recording
+            #return self.angle, self.throttle, self.mode, self.recording
+            return self.dumping, self.angle, self.throttle, self.mode, self.recording
 
     def say_hello(self):
         """
@@ -96,7 +99,8 @@ class LocalWebController(tornado.web.Application):
 
     def _run_threaded(self, img_arr=None):
         self.img_arr = img_arr
-        return self.angle, self.throttle, self.mode, self.recording
+        #return self.angle, self.throttle, self.mode, self.recording
+        return self.dumping, self.angle, self.throttle, self.mode, self.recording
 
     def run(self, img_arr=None):
         return self.run_threaded(img_arr)
@@ -113,6 +117,8 @@ class DriveAPI(tornado.web.RequestHandler):
         and throttle of the vehicle on a the index webpage
         """
         data = tornado.escape.json_decode(self.request.body)
+        #adding dumping
+        self.application.dumping = data['dumping']
         self.application.angle = data['angle']
         self.application.throttle = data['throttle']
         self.application.mode = data['drive_mode']

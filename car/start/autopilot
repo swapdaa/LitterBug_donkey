@@ -1,0 +1,3 @@
+#!/bin/bash -e
+cd /home/pi/mycar/
+screen -dm bash -c 'python manage.py drive --model /home/pi/mycar/models/trashpilot'

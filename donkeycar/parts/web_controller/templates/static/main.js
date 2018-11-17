@@ -3,10 +3,12 @@ var driveHandler = new function() {
 
     var state = {'tele': {
                           "user": {
+                                  'dumping': 0,
                                   'angle': 0,
                                   'throttle': 0,
                                   },
                           "pilot": {
+                                  'dumping': 0,
                                   'angle': 0,
                                   'throttle': 0,
                                   }
@@ -75,6 +77,10 @@ var driveHandler = new function() {
           if(e.which == 75) { throttleDown() } // 'k'  slow down
           if(e.which == 74) { angleLeft() } // 'j' turn left
           if(e.which == 76) { angleRight() } // 'l' turn right
+
+          if(e.which == 74) { dumpingUp() } // 'w' move up
+          if(e.which == 76) { dumpingDown() } // 'l' move down
+
           if(e.which == 65) { updateDriveMode('auto') } // 'a' turn on auto mode
           if(e.which == 68) { updateDriveMode('user') } // 'd' turn on manual mode
           if(e.which == 83) { updateDriveMode('auto_angle') } // 'a' turn on auto mode
@@ -130,6 +136,9 @@ var driveHandler = new function() {
 
     function bindNipple(manager) {
       manager.on('start', function(evt, data) {
+        #adding dumping
+         
+        state.tele.user.dumping = 0
         state.tele.user.angle = 0
         state.tele.user.throttle = 0
         state.recording = true
